@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TransformMove : MonoBehaviour
+{
+    //動く速さを格納する変数
+    float speed;
+    // Start is called before the first frame update
+    void Start()
+    {
+        //動く速さを指定
+        speed = 3.0f;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //関数をUpdate内で連続的に実行
+        Move();
+    }
+    
+    //オブジェクトを動かす関数
+    private void Move()
+    {
+        if (Input.GetKey("up"))
+        {
+            transform.position += transform.forward * speed * Time.deltaTime; 
+        }
+        if (Input.GetKey("down"))
+        {
+            transform.position -= transform.forward * speed * Time.deltaTime;
+        }
+        if (Input.GetKey("right"))
+        {
+            transform.position += transform.right * speed * Time.deltaTime;
+        }
+        if (Input.GetKey("left"))
+        {
+            transform.position -= transform.right * speed * Time.deltaTime;
+        }
+    }
+}
