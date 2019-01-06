@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RigidbodyMove : MonoBehaviour
+{
+    //オブジェクトのRigidbodyコンポーネント変数
+    Rigidbody rb;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();    
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        AddforceMove();
+    }
+
+    //動く速さを指定
+    [SerializeField]
+    float speed = 10.0f;
+    //x軸の力の値を格納する変数
+    float x;
+    //z軸の力の値を格納する変数
+    float z;
+    //playerの速度を格納する変数
+    Vector3 velocity;
+    //物体の速度を落とすときの変数
+    [SerializeField]
+    float control = 3.0f;
+    void AddforceMove()
+    {
+        velocity = rb.velocity;
+        x = Input.GetAxis("Horizontal") * speed;
+        z = Input.GetAxis("Vertical") * speed;
+        Vector3 force = new Vector3(x, 0, z);
+        rb.AddForce(force - velocity*control);
+    }
+}
